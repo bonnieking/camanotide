@@ -1,0 +1,58 @@
+:root {
+  --bg-a: #d9f3ff;
+  --bg-b: #fff5cc;
+  --ink: #173042;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--bg-a), var(--bg-b));
+  transition: background 700ms ease, color 700ms ease;
+}
+
+.wrap {
+  text-align: center;
+  padding: 1.2rem;
+  width: min(92vw, 900px);
+}
+
+.kicker {
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(0.8rem, 2.4vw, 1rem);
+  opacity: 0.8;
+}
+
+h1 {
+  margin: 0.4rem 0;
+  font-size: clamp(3.2rem, 20vw, 11rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+.status {
+  margin: 0;
+  font-size: clamp(1.1rem, 3.7vw, 2rem);
+  font-weight: 700;
+}
+
+.next {
+  margin: 0.45rem 0 0;
+  font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+}
+
+.meta {
+  margin-top: 1rem;
+  font-size: clamp(0.76rem, 2vw, 0.92rem);
+  opacity: 0.75;
+}
