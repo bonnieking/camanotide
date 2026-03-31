@@ -4,12 +4,13 @@ const tideNextEl = document.getElementById("tide-next");
 
 const STATION_ID = "9448094";
 const APP_NAME = "camanotide";
+const NOAA_TIME_ZONE = "gmt";
 
 function todayYmd() {
   const now = new Date();
-  const y = now.getFullYear();
-  const m = String(now.getMonth() + 1).padStart(2, "0");
-  const d = String(now.getDate()).padStart(2, "0");
+  const y = now.getUTCFullYear();
+  const m = String(now.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(now.getUTCDate()).padStart(2, "0");
   return `${y}${m}${d}`;
 }
 
@@ -21,7 +22,7 @@ function buildNoaaUrl() {
     range: "48",
     datum: "MLLW",
     station: STATION_ID,
-    time_zone: "lst_ldt",
+    time_zone: NOAA_TIME_ZONE,
     units: "english",
     interval: "hilo",
     format: "json",
@@ -30,8 +31,10 @@ function buildNoaaUrl() {
 }
 
 function parsePrediction(p) {
+  const raw = p.t.replace(" ", "T");
+  const time = NOAA_TIME_ZONE === "gmt" ? new Date(`${raw}Z`) : new Date(raw);
   return {
-    time: new Date(p.t.replace(" ", "T")),
+    time,
     value: Number(p.v),
     type: p.type,
   };
@@ -111,12 +114,15 @@ async function loadAndRender() {
     const rows = Array.isArray(payload.predictions) ? payload.predictions : [];
     if (rows.length < 2) throw new Error("No tide predictions returned");
 
-    const predictions = rows.map(parsePrediction).filter((p) => !Number.isNaN(p.value) && !Number.isNaN(p.time.getTime()));
+    const predictions = rows
+      .map(parsePrediction)
+      .filter((p) => !Number.isNaN(p.value) && !Number.isNaN(p.time.getTime()));
     if (predictions.length < 2) throw new Error("Invalid prediction data");
 
     const now = new Date();
     const { left, right } = findBracket(predictions, now);
-    if (!left || !right) throw new Error("Current time out of prediction range");
+    if (!left || !right)
+      throw new Error("Current time out of prediction range");
 
     const current = interpolate(now, left, right);
     const rising = right.value > left.value;
