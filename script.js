@@ -5,6 +5,7 @@ const tideNextEl = document.getElementById("tide-next");
 const STATION_ID = "9448094";
 const APP_NAME = "camanotide";
 const NOAA_TIME_ZONE = "gmt";
+const CAMANO_TIME_ZONE = "America/Los_Angeles";
 
 function todayYmd() {
   const now = new Date();
@@ -66,8 +67,15 @@ function softPastelColor(tide, minTide, maxTide, rising) {
   };
 }
 
-function formatTime(dt) {
-  return dt.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+function formatTime(dt, timeZone, includeOffset = false) {
+  const options = { hour: "numeric", minute: "2-digit" };
+  if (includeOffset) {
+    options.timeZoneName = "shortOffset";
+  }
+  if (timeZone) {
+    options.timeZone = timeZone;
+  }
+  return new Intl.DateTimeFormat([], options).format(dt);
 }
 
 function updateUi(current, rising, nextTurn, minTide, maxTide) {
@@ -76,7 +84,9 @@ function updateUi(current, rising, nextTurn, minTide, maxTide) {
 
   if (nextTurn) {
     const highLow = nextTurn.type === "H" ? "high" : "low";
-    tideNextEl.textContent = `Next ${highLow}: ${nextTurn.value.toFixed(2)} ft at ${formatTime(nextTurn.time)}`;
+    const browserTime = formatTime(nextTurn.time, undefined, true);
+    const camanoTime = formatTime(nextTurn.time, CAMANO_TIME_ZONE);
+    tideNextEl.textContent = `Next ${highLow}: ${nextTurn.value.toFixed(2)} ft at ${browserTime}, ${camanoTime} local time`;
   } else {
     tideNextEl.textContent = "No next turn found in current prediction window.";
   }
