@@ -7,12 +7,21 @@ const APP_NAME = "camanotide";
 const NOAA_TIME_ZONE = "gmt";
 const CAMANO_TIME_ZONE = "America/Los_Angeles";
 
+function dateYmdInTimeZone(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const lookup = Object.fromEntries(
+    parts.filter((p) => p.type !== "literal").map((p) => [p.type, p.value]),
+  );
+  return `${lookup.year}${lookup.month}${lookup.day}`;
+}
+
 function todayYmd() {
-  const now = new Date();
-  const y = now.getUTCFullYear();
-  const m = String(now.getUTCMonth() + 1).padStart(2, "0");
-  const d = String(now.getUTCDate()).padStart(2, "0");
-  return `${y}${m}${d}`;
+  return dateYmdInTimeZone(new Date(), CAMANO_TIME_ZONE);
 }
 
 function buildNoaaUrl() {
