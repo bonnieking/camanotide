@@ -103,7 +103,6 @@ function updateUi(current, rising, nextTurn, minTide, maxTide) {
   const colors = softPastelColor(current, minTide, maxTide, rising);
   document.documentElement.style.setProperty("--bg-a", colors.a);
   document.documentElement.style.setProperty("--bg-b", colors.b);
-  document.documentElement.style.setProperty("--ink", colors.ink);
 }
 
 function findBracket(predictions, now) {
