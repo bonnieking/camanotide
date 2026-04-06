@@ -1,14 +1,10 @@
 :root {
-    --bg-a: #ffe8f4;
-    --bg-b: #e6fff4;
-    --bg-c: #fff8d6;
-    --ink: #2d2a3a;
-    --pink: #ff9ad5;
-    --mint: #9ef7d6;
-    --lemon: #ffe27a;
-    --lav: #c9b8ff;
-    --sky: #9bd7ff;
-    --peach: #ffd0a6;
+    --bg-a: #0b0f1a;
+    --bg-b: #111728;
+    --bg-c: #1a2236;
+    --ink: #e8eef9;
+    --muted: rgba(232, 238, 249, 0.68);
+    --glow: rgba(120, 140, 220, 0.35);
 }
 
 * {
@@ -23,9 +19,9 @@ body {
     font-family: "Trebuchet MS", "Avenir Next", sans-serif;
     color: var(--ink);
     background:
-        radial-gradient(circle at 10% 15%, #fff1f8 0%, transparent 38%),
-        radial-gradient(circle at 85% 10%, #f6ffe9 0%, transparent 35%),
-        radial-gradient(circle at 20% 90%, #fff6d9 0%, transparent 40%),
+        radial-gradient(circle at 15% 15%, #1c263d 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, #162033 0%, transparent 40%),
+        radial-gradient(circle at 25% 85%, #141c2c 0%, transparent 40%),
         linear-gradient(160deg, var(--bg-a), var(--bg-b), var(--bg-c));
     background-size: 100% 100%;
     transition:
@@ -34,73 +30,18 @@ body {
     overflow-x: hidden;
 }
 
-body::before,
-body::after {
-    content: "🥚 🐣 🌷 🐇 🪺 🌸 🐥 🥚";
-    position: fixed;
-    left: 0;
-    right: 0;
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-    opacity: 0.22;
-    text-align: center;
-    pointer-events: none;
-    animation: floaty 14s ease-in-out infinite;
-}
-
-body::before {
-    top: 3vh;
-    letter-spacing: 1.4vw;
-}
-
-body::after {
-    bottom: 3vh;
-    letter-spacing: 1.1vw;
-    animation-delay: 3s;
-}
-
 .wrap {
     text-align: center;
     padding: clamp(1.2rem, 3vw, 2.2rem);
     width: min(92vw, 900px);
-    background: rgba(255, 255, 255, 0.7);
-    border: 3px solid rgba(255, 255, 255, 0.9);
+    background: rgba(10, 14, 24, 0.78);
+    border: 1px solid rgba(120, 140, 220, 0.3);
     border-radius: 28px;
     box-shadow:
-        0 18px 45px rgba(46, 35, 75, 0.16),
-        0 0 0 6px rgba(255, 255, 255, 0.45);
+        0 18px 50px rgba(6, 8, 14, 0.55),
+        0 0 0 1px rgba(120, 140, 220, 0.2),
+        0 0 30px var(--glow);
     backdrop-filter: blur(8px);
-}
-
-.banner {
-    display: flex;
-    justify-content: center;
-    gap: clamp(0.35rem, 2vw, 0.9rem);
-    font-size: clamp(1.2rem, 3.5vw, 2rem);
-    margin-bottom: 0.5rem;
-}
-
-.emoji {
-    display: inline-block;
-    animation: hop 2.8s ease-in-out infinite;
-}
-
-.emoji:nth-child(2) {
-    animation-delay: 0.2s;
-}
-.emoji:nth-child(3) {
-    animation-delay: 0.4s;
-}
-.emoji:nth-child(4) {
-    animation-delay: 0.6s;
-}
-.emoji:nth-child(5) {
-    animation-delay: 0.8s;
-}
-.emoji:nth-child(6) {
-    animation-delay: 1s;
-}
-.emoji:nth-child(7) {
-    animation-delay: 1.2s;
 }
 
 .kicker {
@@ -108,7 +49,7 @@ body::after {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-size: clamp(0.8rem, 2.4vw, 1rem);
-    opacity: 0.85;
+    opacity: 0.75;
 }
 
 h1 {
@@ -116,87 +57,24 @@ h1 {
     font-size: clamp(3.2rem, 20vw, 11rem);
     line-height: 0.95;
     letter-spacing: 0.02em;
-    text-shadow: 0 6px 12px rgba(255, 154, 213, 0.35);
+    text-shadow: 0 8px 20px rgba(90, 120, 200, 0.35);
 }
 
 .status {
     margin: 0;
     font-size: clamp(1.1rem, 3.7vw, 2rem);
     font-weight: 800;
-    color: #3b3756;
+    color: #d6def1;
 }
 
 .next {
     margin: 0.45rem 0 0;
     font-size: clamp(0.95rem, 2.6vw, 1.2rem);
-}
-
-.egg-row {
-    display: flex;
-    justify-content: center;
-    gap: 0.45rem;
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-    margin-top: 0.7rem;
-    opacity: 0.9;
-}
-
-.egg-row span {
-    display: inline-block;
-    transform-origin: center;
-    animation: wiggle 3.6s ease-in-out infinite;
-}
-
-.egg-row span:nth-child(2) {
-    animation-delay: 0.3s;
-}
-.egg-row span:nth-child(3) {
-    animation-delay: 0.6s;
-}
-.egg-row span:nth-child(4) {
-    animation-delay: 0.9s;
-}
-.egg-row span:nth-child(5) {
-    animation-delay: 1.2s;
-}
-.egg-row span:nth-child(6) {
-    animation-delay: 1.5s;
-}
-.egg-row span:nth-child(7) {
-    animation-delay: 1.8s;
+    color: var(--muted);
 }
 
 .meta {
     margin-top: 1rem;
     font-size: clamp(0.76rem, 2vw, 0.92rem);
-    opacity: 0.78;
-}
-
-@keyframes hop {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px) rotate(-4deg);
-    }
-}
-
-@keyframes wiggle {
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-    50% {
-        transform: rotate(6deg) scale(1.02);
-    }
-}
-
-@keyframes floaty {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-6px);
-    }
+    opacity: 0.7;
 }
