@@ -47,7 +47,7 @@ body::before {
     position: fixed;
     inset: -35vmax;
     pointer-events: none;
-    opacity: 0.72;
+    opacity: 0.62;
     background: conic-gradient(
         from 0deg,
         var(--pride-red) 0deg,
