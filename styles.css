@@ -34,39 +34,33 @@ body {
     gap: 0.9rem;
     font-family: "Trebuchet MS", "Avenir Next", sans-serif;
     color: var(--ink);
-    background:
-        radial-gradient(circle at 15% 15%, #1c263d 0%, transparent 45%),
-        radial-gradient(circle at 85% 20%, #162033 0%, transparent 40%),
-        radial-gradient(circle at 25% 85%, #141c2c 0%, transparent 40%),
-        linear-gradient(160deg, var(--bg-a), var(--bg-b), var(--bg-c));
-    background-size: 100% 100%;
-    transition:
-        background 700ms ease,
-        color 700ms ease;
+    background: #060912;
+    transition: color 700ms ease;
     overflow-x: hidden;
     position: relative;
     padding: 0.9rem clamp(0.6rem, 2vw, 1.2rem);
 }
 
-/* Rainbow aura layer */
+/* Full-screen rotating rainbow background */
 body::before {
     content: "";
     position: fixed;
-    inset: -30vmax;
+    inset: -35vmax;
     pointer-events: none;
-    opacity: 0.15;
+    opacity: 0.72;
     background: conic-gradient(
         from 0deg,
-        var(--pride-red),
-        var(--pride-orange),
-        var(--pride-yellow),
-        var(--pride-green),
-        var(--pride-blue),
-        var(--pride-violet),
-        var(--pride-red)
+        var(--pride-red) 0deg,
+        var(--pride-orange) 60deg,
+        var(--pride-yellow) 120deg,
+        var(--pride-green) 180deg,
+        var(--pride-blue) 240deg,
+        var(--pride-violet) 300deg,
+        var(--pride-red) 360deg
     );
-    filter: blur(80px) saturate(130%);
-    animation: pride-spin 22s linear infinite;
+    filter: blur(58px) saturate(145%);
+    transform-origin: center;
+    animation: pride-spin 16s linear infinite;
 }
 
 /* Trans stripes at top & bottom */
