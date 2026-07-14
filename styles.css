@@ -1,23 +1,16 @@
 :root {
-    --bg-a: #0b0f1a;
-    --bg-b: #111728;
-    --bg-c: #1a2236;
-    --ink: #eef4ff;
-    --muted: rgba(238, 244, 255, 0.75);
-    --glow: rgba(120, 140, 220, 0.35);
+    --bg-a: #2f0f07;
+    --bg-b: #4f180a;
+    --bg-c: #160903;
+    --ink: #fff2d6;
+    --muted: rgba(255, 233, 191, 0.8);
+    --glow: rgba(255, 115, 0, 0.35);
 
-    /* Pride palette */
-    --pride-red: #e40303;
-    --pride-orange: #ff8c00;
-    --pride-yellow: #ffed00;
-    --pride-green: #008026;
-    --pride-blue: #004dff;
-    --pride-violet: #750787;
-
-    /* Trans flag palette */
-    --trans-blue: #5bcffb;
-    --trans-pink: #f5a9b8;
-    --trans-white: #ffffff;
+    --heat-red: #ff3b1f;
+    --heat-orange: #ff7a00;
+    --heat-amber: #ffb000;
+    --heat-gold: #ffd36b;
+    --heat-char: #2b0d06;
 }
 
 * {
@@ -34,67 +27,65 @@ body {
     gap: 0.9rem;
     font-family: "Trebuchet MS", "Avenir Next", sans-serif;
     color: var(--ink);
-    background: #060912;
+    background: linear-gradient(160deg, var(--bg-a), var(--bg-b) 58%, var(--bg-c));
     transition: color 700ms ease;
     overflow-x: hidden;
     position: relative;
     padding: 0.9rem clamp(0.6rem, 2vw, 1.2rem);
 }
 
-/* Full-screen rotating rainbow background */
+/* Full-screen apocalyptic heat bloom */
 body::before {
     content: "";
     position: fixed;
-    inset: -35vmax;
+    inset: -40vmax;
     pointer-events: none;
-    opacity: 0.62;
-    background: conic-gradient(
-        from 0deg,
-        var(--pride-red) 0deg,
-        var(--pride-orange) 60deg,
-        var(--pride-yellow) 120deg,
-        var(--pride-green) 180deg,
-        var(--pride-blue) 240deg,
-        var(--pride-violet) 300deg,
-        var(--pride-red) 360deg
-    );
-    filter: blur(58px) saturate(145%);
+    opacity: 0.7;
+    background:
+        radial-gradient(circle at 35% 30%, rgba(255, 210, 100, 0.32), transparent 32%),
+        radial-gradient(circle at 68% 25%, rgba(255, 80, 0, 0.34), transparent 40%),
+        conic-gradient(
+            from 0deg,
+            var(--heat-char) 0deg,
+            var(--heat-red) 85deg,
+            var(--heat-orange) 160deg,
+            var(--heat-amber) 220deg,
+            var(--heat-red) 300deg,
+            var(--heat-char) 360deg
+        );
+    filter: blur(62px) saturate(140%);
     transform-origin: center;
-    animation: pride-spin 16s linear infinite;
+    animation: heat-spin 18s linear infinite;
 }
 
-/* Trans stripes at top & bottom */
+/* Heat shimmer bands */
 body::after {
     content: "";
     position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 10px;
+    inset: 0;
     pointer-events: none;
-    background: linear-gradient(
-        90deg,
-        var(--trans-blue),
-        var(--trans-pink),
-        var(--trans-white),
-        var(--trans-pink),
-        var(--trans-blue)
-    );
-    box-shadow:
-        0 calc(100vh - 10px) 0 0 rgba(0, 0, 0, 0),
-        0 calc(100vh - 10px) 0 0;
+    opacity: 0.22;
+    background:
+        repeating-linear-gradient(
+            180deg,
+            rgba(255, 210, 140, 0.26) 0px,
+            rgba(255, 210, 140, 0.26) 2px,
+            transparent 6px,
+            transparent 14px
+        );
+    mix-blend-mode: screen;
 }
 
 .wrap {
     text-align: center;
     padding: clamp(1.2rem, 3vw, 2.2rem);
     width: min(92vw, 900px);
-    background: rgba(10, 14, 24, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(35, 13, 6, 0.82);
+    border: 1px solid rgba(255, 198, 120, 0.2);
     border-radius: 28px;
     box-shadow:
-        0 18px 50px rgba(6, 8, 14, 0.55),
-        0 0 0 1px rgba(120, 140, 220, 0.2),
+        0 18px 50px rgba(15, 7, 3, 0.55),
+        0 0 0 1px rgba(255, 145, 35, 0.25),
         0 0 30px var(--glow);
     backdrop-filter: blur(8px);
     position: relative;
@@ -109,12 +100,12 @@ body::after {
     padding: 2px;
     background: linear-gradient(
         90deg,
-        var(--pride-red),
-        var(--pride-orange),
-        var(--pride-yellow),
-        var(--pride-green),
-        var(--pride-blue),
-        var(--pride-violet)
+        var(--heat-red),
+        var(--heat-orange),
+        var(--heat-amber),
+        var(--heat-gold),
+        var(--heat-orange),
+        var(--heat-red)
     );
     -webkit-mask:
         linear-gradient(#000 0 0) content-box,
@@ -138,14 +129,14 @@ h1 {
     font-size: clamp(3.2rem, 20vw, 11rem);
     line-height: 0.95;
     letter-spacing: 0.02em;
-    text-shadow: 0 8px 20px rgba(90, 120, 200, 0.35);
+    text-shadow: 0 8px 24px rgba(255, 120, 20, 0.45);
     background: linear-gradient(
         90deg,
-        var(--trans-blue),
-        var(--trans-pink),
-        var(--trans-white),
-        var(--trans-pink),
-        var(--trans-blue)
+        var(--heat-gold),
+        #ffe89c,
+        var(--heat-amber),
+        var(--heat-orange),
+        var(--heat-red)
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -156,7 +147,7 @@ h1 {
     margin: 0;
     font-size: clamp(1.1rem, 3.7vw, 2rem);
     font-weight: 800;
-    color: #ecf3ff;
+    color: #fff2d9;
 }
 
 .next {
@@ -171,15 +162,17 @@ h1 {
     opacity: 0.75;
 }
 
-.pride-note {
+.heat-note {
     margin-top: 0.55rem;
     margin-bottom: 0;
-    font-size: clamp(0.85rem, 2.3vw, 1rem);
-    letter-spacing: 0.06em;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    font-weight: 700;
-    color: var(--trans-pink);
-    text-shadow: 0 0 10px rgba(245, 169, 184, 0.35);
+    font-weight: 800;
+    color: var(--heat-gold);
+    text-shadow: 0 0 12px rgba(255, 190, 80, 0.45);
+    display: inline-block;
+    animation: heat-pulse 1.8s ease-in-out infinite;
 }
 
 .banner {
@@ -191,28 +184,40 @@ h1 {
     text-align: center;
     padding: 0.3rem 0.8rem;
     border-radius: 999px;
-    background: rgba(9, 14, 24, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    box-shadow: 0 0 22px rgba(120, 140, 220, 0.25);
+    background: rgba(32, 12, 5, 0.62);
+    border: 1px solid rgba(255, 174, 94, 0.25);
+    box-shadow: 0 0 22px rgba(255, 129, 31, 0.3);
     position: relative;
     z-index: 1;
 }
 
 .banner.top {
-    color: var(--trans-blue);
-    text-shadow: 0 0 12px rgba(91, 207, 251, 0.4);
+    color: var(--heat-gold);
+    text-shadow: 0 0 12px rgba(255, 205, 90, 0.45);
 }
 
 .banner.bottom {
-    color: var(--trans-pink);
-    text-shadow: 0 0 12px rgba(245, 169, 184, 0.4);
+    color: var(--heat-orange);
+    text-shadow: 0 0 12px rgba(255, 128, 30, 0.45);
 }
 
-@keyframes pride-spin {
+@keyframes heat-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.08);
+        filter: brightness(1.16);
+    }
+}
+
+@keyframes heat-spin {
     from {
         transform: rotate(0deg) scale(1);
     }
     to {
-        transform: rotate(360deg) scale(1.06);
+        transform: rotate(360deg) scale(1.08);
     }
 }

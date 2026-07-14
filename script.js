@@ -58,21 +58,20 @@ function interpolate(now, left, right) {
   return left.value + (right.value - left.value) * ratio;
 }
 
-function softPastelColor(tide, minTide, maxTide, rising) {
+function heatWaveColor(tide, minTide, maxTide, rising) {
   const span = Math.max(0.1, maxTide - minTide);
   const level = Math.max(0, Math.min(1, (tide - minTide) / span));
 
-  const hueA = Math.round(205 - level * 40 + (rising ? 8 : -8));
-  const hueB = Math.round(50 + level * 35 + (rising ? -6 : 6));
-  const satA = 72;
-  const satB = 82;
-  const litA = Math.round(92 - level * 5);
-  const litB = Math.round(89 - (1 - level) * 4);
+  const hueA = Math.round(14 + level * 10 + (rising ? 4 : -4));
+  const hueB = Math.round(30 + level * 14 + (rising ? -2 : 2));
+  const satA = 82;
+  const satB = 88;
+  const litA = Math.round(14 + level * 9);
+  const litB = Math.round(20 + level * 11);
 
   return {
     a: `hsl(${hueA} ${satA}% ${litA}%)`,
     b: `hsl(${hueB} ${satB}% ${litB}%)`,
-    ink: level > 0.58 ? "#113146" : "#1f3041",
   };
 }
 
@@ -100,7 +99,7 @@ function updateUi(current, rising, nextTurn, minTide, maxTide) {
     tideNextEl.textContent = "No next turn found in current prediction window.";
   }
 
-  const colors = softPastelColor(current, minTide, maxTide, rising);
+  const colors = heatWaveColor(current, minTide, maxTide, rising);
   document.documentElement.style.setProperty("--bg-a", colors.a);
   document.documentElement.style.setProperty("--bg-b", colors.b);
 }
