@@ -58,16 +58,16 @@ function interpolate(now, left, right) {
   return left.value + (right.value - left.value) * ratio;
 }
 
-function heatWaveColor(tide, minTide, maxTide, rising) {
+function coastalColor(tide, minTide, maxTide, rising) {
   const span = Math.max(0.1, maxTide - minTide);
   const level = Math.max(0, Math.min(1, (tide - minTide) / span));
 
-  const hueA = Math.round(14 + level * 10 + (rising ? 4 : -4));
-  const hueB = Math.round(30 + level * 14 + (rising ? -2 : 2));
-  const satA = 82;
-  const satB = 88;
-  const litA = Math.round(14 + level * 9);
-  const litB = Math.round(20 + level * 11);
+  const hueA = Math.round(165 + level * 18 + (rising ? 4 : -4));
+  const hueB = Math.round(195 + level * 22 + (rising ? -3 : 3));
+  const satA = 54;
+  const satB = 58;
+  const litA = Math.round(18 + level * 10);
+  const litB = Math.round(22 + level * 9);
 
   return {
     a: `hsl(${hueA} ${satA}% ${litA}%)`,
@@ -99,7 +99,7 @@ function updateUi(current, rising, nextTurn, minTide, maxTide) {
     tideNextEl.textContent = "No next turn found in current prediction window.";
   }
 
-  const colors = heatWaveColor(current, minTide, maxTide, rising);
+  const colors = coastalColor(current, minTide, maxTide, rising);
   document.documentElement.style.setProperty("--bg-a", colors.a);
   document.documentElement.style.setProperty("--bg-b", colors.b);
 }

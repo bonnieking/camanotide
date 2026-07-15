@@ -1,16 +1,16 @@
 :root {
-    --bg-a: #2f0f07;
-    --bg-b: #4f180a;
-    --bg-c: #160903;
-    --ink: #fff2d6;
-    --muted: rgba(255, 233, 191, 0.8);
-    --glow: rgba(255, 115, 0, 0.35);
+    --bg-a: #112422;
+    --bg-b: #15363a;
+    --bg-c: #08161c;
+    --ink: #eaf6f1;
+    --muted: rgba(218, 238, 231, 0.82);
+    --glow: rgba(95, 181, 184, 0.28);
 
-    --heat-red: #ff3b1f;
-    --heat-orange: #ff7a00;
-    --heat-amber: #ffb000;
-    --heat-gold: #ffd36b;
-    --heat-char: #2b0d06;
+    --sea-deep: #0e3a46;
+    --sea-mid: #1f6b7a;
+    --sea-foam: #7fd5c8;
+    --forest: #2f6f52;
+    --moss: #8db66f;
 }
 
 * {
@@ -27,65 +27,63 @@ body {
     gap: 0.9rem;
     font-family: "Trebuchet MS", "Avenir Next", sans-serif;
     color: var(--ink);
-    background: linear-gradient(160deg, var(--bg-a), var(--bg-b) 58%, var(--bg-c));
+    background: linear-gradient(155deg, var(--bg-a), var(--bg-b) 56%, var(--bg-c));
     transition: color 700ms ease;
     overflow-x: hidden;
     position: relative;
     padding: 0.9rem clamp(0.6rem, 2vw, 1.2rem);
 }
 
-/* Full-screen apocalyptic heat bloom */
+/* Soft water/forest atmospheric bloom */
 body::before {
     content: "";
     position: fixed;
     inset: -40vmax;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.62;
     background:
-        radial-gradient(circle at 35% 30%, rgba(255, 210, 100, 0.32), transparent 32%),
-        radial-gradient(circle at 68% 25%, rgba(255, 80, 0, 0.34), transparent 40%),
+        radial-gradient(circle at 28% 25%, rgba(127, 213, 200, 0.32), transparent 35%),
+        radial-gradient(circle at 72% 30%, rgba(47, 111, 82, 0.26), transparent 42%),
         conic-gradient(
             from 0deg,
-            var(--heat-char) 0deg,
-            var(--heat-red) 85deg,
-            var(--heat-orange) 160deg,
-            var(--heat-amber) 220deg,
-            var(--heat-red) 300deg,
-            var(--heat-char) 360deg
+            #0a2c35 0deg,
+            #184f5f 100deg,
+            #245e4a 190deg,
+            #0f3640 280deg,
+            #0a2c35 360deg
         );
-    filter: blur(62px) saturate(140%);
+    filter: blur(60px) saturate(130%);
     transform-origin: center;
-    animation: heat-spin 18s linear infinite;
+    animation: drift-spin 24s linear infinite;
 }
 
-/* Heat shimmer bands */
+/* Gentle surface shimmer */
 body::after {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    opacity: 0.22;
-    background:
-        repeating-linear-gradient(
-            180deg,
-            rgba(255, 210, 140, 0.26) 0px,
-            rgba(255, 210, 140, 0.26) 2px,
-            transparent 6px,
-            transparent 14px
-        );
+    opacity: 0.14;
+    background: repeating-linear-gradient(
+        180deg,
+        rgba(150, 225, 220, 0.26) 0px,
+        rgba(150, 225, 220, 0.26) 2px,
+        transparent 7px,
+        transparent 15px
+    );
     mix-blend-mode: screen;
 }
 
 .wrap {
     text-align: center;
     padding: clamp(1.2rem, 3vw, 2.2rem);
-    width: min(92vw, 900px);
-    background: rgba(35, 13, 6, 0.82);
-    border: 1px solid rgba(255, 198, 120, 0.2);
+    width: min(92vw, 940px);
+    background: rgba(8, 25, 30, 0.8);
+    border: 1px solid rgba(157, 227, 213, 0.24);
     border-radius: 28px;
     box-shadow:
-        0 18px 50px rgba(15, 7, 3, 0.55),
-        0 0 0 1px rgba(255, 145, 35, 0.25),
+        0 18px 50px rgba(6, 14, 18, 0.58),
+        0 0 0 1px rgba(104, 187, 180, 0.2),
         0 0 30px var(--glow);
     backdrop-filter: blur(8px);
     position: relative;
@@ -100,19 +98,19 @@ body::after {
     padding: 2px;
     background: linear-gradient(
         90deg,
-        var(--heat-red),
-        var(--heat-orange),
-        var(--heat-amber),
-        var(--heat-gold),
-        var(--heat-orange),
-        var(--heat-red)
+        var(--sea-deep),
+        var(--sea-mid),
+        var(--sea-foam),
+        var(--moss),
+        var(--forest),
+        var(--sea-deep)
     );
     -webkit-mask:
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    opacity: 0.8;
+    opacity: 0.82;
     pointer-events: none;
 }
 
@@ -121,7 +119,7 @@ body::after {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-size: clamp(0.8rem, 2.4vw, 1rem);
-    opacity: 0.75;
+    opacity: 0.78;
 }
 
 h1 {
@@ -129,15 +127,8 @@ h1 {
     font-size: clamp(3.2rem, 20vw, 11rem);
     line-height: 0.95;
     letter-spacing: 0.02em;
-    text-shadow: 0 8px 24px rgba(255, 120, 20, 0.45);
-    background: linear-gradient(
-        90deg,
-        var(--heat-gold),
-        #ffe89c,
-        var(--heat-amber),
-        var(--heat-orange),
-        var(--heat-red)
-    );
+    text-shadow: 0 8px 24px rgba(66, 166, 179, 0.4);
+    background: linear-gradient(90deg, #d8fff7, #9be8dc, #6dcad5, #5eaec5, #91d9cf);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -147,7 +138,7 @@ h1 {
     margin: 0;
     font-size: clamp(1.1rem, 3.7vw, 2rem);
     font-weight: 800;
-    color: #fff2d9;
+    color: #e3f6f2;
 }
 
 .next {
@@ -158,21 +149,33 @@ h1 {
 
 .meta {
     margin-top: 1rem;
+    margin-bottom: 0.55rem;
     font-size: clamp(0.76rem, 2vw, 0.92rem);
-    opacity: 0.75;
+    opacity: 0.78;
 }
 
-.heat-note {
-    margin-top: 0.55rem;
+.land-ack {
+    margin: 0.3rem 0 0;
+    padding: 0.65rem 0.8rem;
+    border-left: 3px solid rgba(127, 213, 200, 0.7);
+    background: rgba(18, 51, 53, 0.35);
+    border-radius: 10px;
+    text-align: left;
+    line-height: 1.38;
+    font-size: clamp(0.78rem, 2.2vw, 0.94rem);
+    color: rgba(228, 247, 239, 0.95);
+}
+
+.nature-note {
+    margin-top: 0.62rem;
     margin-bottom: 0;
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(1rem, 2.5vw, 1.24rem);
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     font-weight: 800;
-    color: var(--heat-gold);
-    text-shadow: 0 0 12px rgba(255, 190, 80, 0.45);
+    color: #c7fff2;
+    text-shadow: 0 0 12px rgba(136, 233, 214, 0.45);
     display: inline-block;
-    animation: heat-pulse 1.8s ease-in-out infinite;
+    animation: nature-pulse 2.2s ease-in-out infinite;
 }
 
 .banner {
@@ -184,40 +187,40 @@ h1 {
     text-align: center;
     padding: 0.3rem 0.8rem;
     border-radius: 999px;
-    background: rgba(32, 12, 5, 0.62);
-    border: 1px solid rgba(255, 174, 94, 0.25);
-    box-shadow: 0 0 22px rgba(255, 129, 31, 0.3);
+    background: rgba(7, 30, 35, 0.62);
+    border: 1px solid rgba(127, 213, 200, 0.3);
+    box-shadow: 0 0 22px rgba(88, 179, 179, 0.28);
     position: relative;
     z-index: 1;
 }
 
 .banner.top {
-    color: var(--heat-gold);
-    text-shadow: 0 0 12px rgba(255, 205, 90, 0.45);
+    color: #bdf0e7;
+    text-shadow: 0 0 12px rgba(147, 230, 220, 0.45);
 }
 
 .banner.bottom {
-    color: var(--heat-orange);
-    text-shadow: 0 0 12px rgba(255, 128, 30, 0.45);
+    color: #9fe2d2;
+    text-shadow: 0 0 12px rgba(120, 210, 197, 0.42);
 }
 
-@keyframes heat-pulse {
+@keyframes nature-pulse {
     0%,
     100% {
         transform: scale(1);
         filter: brightness(1);
     }
     50% {
-        transform: scale(1.08);
-        filter: brightness(1.16);
+        transform: scale(1.06);
+        filter: brightness(1.12);
     }
 }
 
-@keyframes heat-spin {
+@keyframes drift-spin {
     from {
         transform: rotate(0deg) scale(1);
     }
     to {
-        transform: rotate(360deg) scale(1.08);
+        transform: rotate(360deg) scale(1.06);
     }
 }
