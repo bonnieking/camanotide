@@ -155,15 +155,15 @@ h1 {
 }
 
 .land-ack {
-    margin: 0.3rem 0 0;
-    padding: 0.65rem 0.8rem;
-    border-left: 3px solid rgba(127, 213, 200, 0.7);
+    margin: 0.4rem 0 0;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid rgba(127, 213, 200, 0.28);
     background: rgba(18, 51, 53, 0.35);
     border-radius: 10px;
     text-align: left;
-    line-height: 1.38;
-    font-size: clamp(0.78rem, 2.2vw, 0.94rem);
-    color: rgba(228, 247, 239, 0.95);
+    line-height: 1.45;
+    font-size: clamp(0.95rem, 2.5vw, 1.12rem);
+    color: rgba(228, 247, 239, 0.96);
 }
 
 .nature-note {
